@@ -1,12 +1,32 @@
 import { z } from "zod";
-
+import { generateText } from 'ai';
+import { google } from '@ai-sdk/google';
 import {
   createTRPCRouter,
   protectedProcedure,
   publicProcedure,
 } from "@/server/api/trpc";
+import { inngest } from "@/server/inngest/client";
 
 export const postRouter = createTRPCRouter({
+
+  testAI: protectedProcedure.
+    input(z.object({
+      name: z.string().min(1),
+      model: z.string().optional(),
+    })).
+    mutation(async ({ ctx, input }) => {
+      await inngest.send({
+        name: "execute/ai",
+        data: {
+          name: input.name,
+          model: input.model,
+          userId: ctx.session.user.id,
+        },
+      });
+      return { success: true, message: "Job queued successfully" }
+    }),
+
   hello: publicProcedure
     .input(z.object({ text: z.string() }))
     .query(({ input }) => {
