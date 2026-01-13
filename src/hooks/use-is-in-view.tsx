@@ -13,7 +13,7 @@ function useIsInView<T extends HTMLElement = HTMLElement>(
 ) {
   const { inView, inViewOnce = false, inViewMargin = '0px' } = options;
   const localRef = React.useRef<T>(null);
-  React.useImperativeHandle(ref, () => localRef.current as T);
+  React.useImperativeHandle(ref, () => localRef.current!);
   const inViewResult = useInView(localRef, {
     once: inViewOnce,
     margin: inViewMargin,

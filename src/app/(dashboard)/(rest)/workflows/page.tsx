@@ -1,4 +1,5 @@
 
+import Link from "next/link";
 import { SignInButton, SignOutButton } from "@/app/_components/auth-buttons";
 import { getSession } from "@/server/better-auth/server";
 import { api, HydrateClient } from "@/trpc/server";
@@ -17,6 +18,13 @@ export default async function Home() {
           <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
             Hello World
           </h1>
+
+          <Link
+            href="/users"
+            className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
+          >
+            Manage Users
+          </Link>
 
           <div className="flex flex-col items-center gap-2">
             <p className="text-2xl text-white">

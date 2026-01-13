@@ -21,9 +21,15 @@ export const executeAI = inngest.createFunction(
     { id: "execute-ai" },
     { event: "execute/ai" },
     async ({ event, step }) => {
-        const modelName = event.data.model || "gemini-2.5-flash";
-        const prompt = event.data.name || "Write a recipe for a vegetarian lasanga for 4 people.";
-        const userId = event.data.userId;
+        interface EventData {
+            model?: string;
+            name?: string;
+            userId?: string;
+        }
+        const data = event.data as EventData;
+        const modelName = data.model ?? "gemini-2.5-flash";
+        const prompt = data.name ?? "Write a recipe for a vegetarian lasanga for 4 people.";
+        const userId = data.userId;
 
         const { text } = await step.ai.wrap("generate-text", generateText, {
             model: getModel(modelName),

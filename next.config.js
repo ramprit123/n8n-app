@@ -5,6 +5,14 @@
 import "./src/env.js";
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+    async redirects() {
+        return [{
+            source: "/",
+            destination: "/workflows",
+            permanent: false
+        }]
+    }
+};
 
 export default config;

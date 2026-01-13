@@ -1,6 +1,4 @@
 import { z } from "zod";
-import { generateText } from 'ai';
-import { google } from '@ai-sdk/google';
 import {
   createTRPCRouter,
   protectedProcedure,
