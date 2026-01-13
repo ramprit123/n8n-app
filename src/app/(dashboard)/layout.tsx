@@ -1,16 +1,19 @@
-export default async function Layout({
-    children,
-    params,
-}: {
-    children: React.ReactNode;
-    params: Promise<{ id: string }>;
-}) {
-    const { id } = await params;
+import { AppSidebar } from "@/components/app-sidebar"
+import { SiteHeader } from "@/components/site-header"
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 
+export default function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <section>
-            <header>Layout ID: {id}</header>
-            {children}
-        </section>
+        <div className="[--header-height:calc(--spacing(14))]">
+            <SidebarProvider className="flex flex-col">
+                <SiteHeader />
+                <div className="flex flex-1">
+                    <AppSidebar />
+                    <SidebarInset>
+                        {children}
+                    </SidebarInset>
+                </div>
+            </SidebarProvider>
+        </div>
     );
 }

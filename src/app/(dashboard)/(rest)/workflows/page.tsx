@@ -1,50 +1,12 @@
-
-import Link from "next/link";
-import { SignInButton, SignOutButton } from "@/app/_components/auth-buttons";
-import { getSession } from "@/server/better-auth/server";
-import { api, HydrateClient } from "@/trpc/server";
-
-export default async function Home() {
-  const hello = await api.post.hello({ text: "from tRPC" });
-  const session = await getSession();
-  if (session) {
-    void api.post.getLatest.prefetch();
-  }
-
+export default function Page() {
   return (
-    <HydrateClient>
-      <main>
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Hello World
-          </h1>
-
-          <Link
-            href="/users"
-            className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
-          >
-            Manage Users
-          </Link>
-
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-2xl text-white">
-              {hello ? hello.greeting : "Loading tRPC query..."}
-            </p>
-
-            <div className="flex flex-col items-center justify-center gap-4">
-              <p className="text-center text-2xl text-white">
-                {session && <span>Logged in as {session.user?.name}</span>}
-              </p>
-              {!session ? (
-                <SignInButton />
-              ) : (
-                <SignOutButton />
-              )}
-            </div>
-          </div>
-
-        </div>
-      </main>
-    </HydrateClient>
-  );
+    <div className="flex flex-1 flex-col gap-4 p-4">
+      <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+        <div className="bg-muted/50 aspect-video rounded-xl" />
+        <div className="bg-muted/50 aspect-video rounded-xl" />
+        <div className="bg-muted/50 aspect-video rounded-xl" />
+      </div>
+      <div className="bg-muted/50 min-h-screen flex-1 rounded-xl md:min-h-min" />
+    </div>
+  )
 }

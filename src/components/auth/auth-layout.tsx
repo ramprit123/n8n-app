@@ -13,6 +13,15 @@ export function AuthLayout({ children, title, description }: AuthLayoutProps) {
             <div className="flex w-full flex-col justify-center px-4 lg:w-[30%] lg:px-12">
                 <div className="mx-auto w-full max-w-sm space-y-6">
                     <div className="flex flex-col space-y-2 text-center lg:text-left">
+                        <div className="flex justify-center lg:justify-start mb-4">
+                            <Image
+                                src="/images/logo.png"
+                                alt="Logo"
+                                width={40}
+                                height={40}
+                                className="rounded-lg"
+                            />
+                        </div>
                         <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
                         <p className="text-muted-foreground">{description}</p>
                     </div>
